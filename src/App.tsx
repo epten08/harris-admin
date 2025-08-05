@@ -1,17 +1,44 @@
-import './App.css'
+import React, { useEffect } from 'react';
+import { Provider } from 'react-redux';
+import { store } from './store';
+import { useAuth } from './hooks/useAuth';
+import AuthPage from './pages/AuthPage';
+import Dashboard from './pages/Dashboard';
+import NotificationToast from './components/ui/NotificationToast';
+import './App.css';
 
-function App() {
+const AppContent: React.FC = () => {
+  const { user, isLoading, loadUser } = useAuth();
+
+  useEffect(() => {
+    loadUser();
+  }, [loadUser]);
+
+  if (isLoading) {
+    return (
+      <div className="min-h-screen flex items-center justify-center bg-gray-50">
+        <div className="text-center">
+          <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-blue-600 mx-auto mb-4"></div>
+          <p className="text-gray-600">Loading...</p>
+        </div>
+      </div>
+    );
+  }
+
   return (
-    <div className="bg-white p-6 rounded-lg shadow-lg max-w-sm text-center">
-        <h2 className="text-2xl font-bold text-gray-800">Tailwind Card</h2>
-        <p className="text-gray-600 mt-3">
-            This is a simple card layout built with Tailwind CSS.
-        </p>
-        <button className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded mt-4">
-            Learn More
-        </button>
-    </div>
+    <>
+      {user ? <Dashboard /> : <AuthPage />}
+      <NotificationToast />
+    </>
   );
-}
+};
+
+const App: React.FC = () => {
+  return (
+    <Provider store={store}>
+      <AppContent />
+    </Provider>
+  );
+};
 
 export default App;
