@@ -3,6 +3,7 @@ import authReducer from './slices/authSlice';
 import uiReducer from './slices/uiSlice';
 import bookingsReducer from './slices/bookingSlice';
 import lodgesReducer from './slices/lodgeSlice';
+import staffReducer from './slices/staffSlice';
 
 export const store = configureStore({
   reducer: {
@@ -10,6 +11,7 @@ export const store = configureStore({
     ui: uiReducer,
     bookings: bookingsReducer,
     lodges: lodgesReducer,
+    staff: staffReducer,
   },
   middleware: (getDefaultMiddleware) =>
     getDefaultMiddleware({

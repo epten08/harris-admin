@@ -26,11 +26,49 @@ const LoginForm: React.FC<LoginFormProps> = ({ onForgotPassword, isLoading, erro
   const [touched, setTouched] = useState<{ [key: string]: boolean }>({});
 
   // Demo credentials for quick access
-  const demoCredentials = [
-    { role: 'Admin', email: 'admin@harrislodges.com', password: 'admin123' },
-    { role: 'Manager', email: 'manager@harrislodges.com', password: 'manager123' },
-    { role: 'Receptionist', email: 'reception@harrislodges.com', password: 'reception123' },
-    { role: 'Cleaner', email: 'cleaner@harrislodges.com', password: 'cleaner123' }
+ const demoCredentials = [
+    { 
+      role: 'Admin', 
+      email: 'admin@harrislodges.com', 
+      password: 'admin123',
+      description: 'Full system access',
+      lodges: 'All Lodges'
+    },
+    { 
+      role: 'Manager', 
+      email: 'manager@harrislodges.com', 
+      password: 'manager123',
+      description: 'Operations management',
+      lodges: 'All Lodges'
+    },
+    { 
+      role: 'Supervisor', 
+      email: 'supervisor@harrislodges.com', 
+      password: 'supervisor123',
+      description: 'Lodge supervision',
+      lodges: 'Victoria Falls & Hwange'
+    },
+    { 
+      role: 'Receptionist', 
+      email: 'reception@harrislodges.com', 
+      password: 'reception123',
+      description: 'Front desk operations',
+      lodges: 'Victoria Falls Lodge'
+    },
+    { 
+      role: 'Cleaner', 
+      email: 'cleaner@harrislodges.com', 
+      password: 'cleaner123',
+      description: 'Housekeeping duties',
+      lodges: 'Victoria Falls Lodge'
+    },
+    { 
+      role: 'Maintenance', 
+      email: 'maintenance@harrislodges.com', 
+      password: 'maintenance123',
+      description: 'Facility maintenance',
+      lodges: 'All Lodges'
+    }
   ];
 
   useEffect(() => {
@@ -227,23 +265,31 @@ const LoginForm: React.FC<LoginFormProps> = ({ onForgotPassword, isLoading, erro
 
         {/* Demo credentials section */}
         <div className="mt-8 p-4 bg-gray-50 rounded-lg">
-          <p className="text-xs font-medium text-gray-700 mb-3">Quick Demo Access:</p>
-          <div className="grid grid-cols-2 gap-2">
+          <p className="text-xs font-medium text-gray-700 mb-3">Demo Access Levels:</p>
+          <div className="grid grid-cols-1 gap-2">
             {demoCredentials.map((cred, index) => (
               <button
                 key={index}
                 type="button"
                 onClick={() => handleDemoLogin(cred)}
-                className="p-2 text-xs bg-white border border-gray-200 rounded hover:bg-gray-50 transition-colors"
+                className="p-3 text-xs bg-white border border-gray-200 rounded hover:bg-gray-50 transition-colors text-left"
                 disabled={isLoading}
               >
-                <div className="font-medium text-gray-700">{cred.role}</div>
-                <div className="text-gray-500 truncate">{cred.email}</div>
+                <div className="flex items-center justify-between">
+                  <div className="flex-1">
+                    <div className="font-medium text-gray-700">{cred.role}</div>
+                    <div className="text-gray-500 text-xs">{cred.description}</div>
+                    <div className="text-blue-600 text-xs mt-1">📍 {cred.lodges}</div>
+                  </div>
+                  <div className="text-gray-400 text-xs">
+                    {cred.email.split('@')[0]}
+                  </div>
+                </div>
               </button>
             ))}
           </div>
           <p className="text-xs text-gray-500 mt-2">
-            Click any role above to auto-fill login credentials
+            Click any role to auto-fill credentials and see lodge-specific access
           </p>
         </div>
 
