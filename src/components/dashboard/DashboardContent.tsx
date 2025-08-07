@@ -14,7 +14,7 @@ const MaintenanceDashboard = React.lazy(() => import('./MaintenanceDashboard'));
 
 // Lazy load modules
 const LodgesModule = React.lazy(() => import('./modules/LodgesModule'));
-const BookingsModule = React.lazy(() => import('./modules/BookingModule'));
+const BookingsModule = React.lazy(() => import('./modules/BookingsModule'));
 const CustomersModule = React.lazy(() => import('./modules/CustomerModule'));
 const StaffModule = React.lazy(() => import('./modules/StaffModule'));
 const InvoicesModule = React.lazy(() => import('./modules/InvoiceModule'));
